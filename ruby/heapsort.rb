@@ -1,15 +1,53 @@
 
-def left(arr, i)
+def left(i)
   1 + (i << 1)
 end
 
-def right(arr, i)
+def right(i)
   2 + (i << 1)
 end
 
+def parent(i)
+  (i >> 1)
+end
+
+def heap_increase_key(arr, i, key)
+  if key < arr[i]
+    raise "Invalid input"
+  end
+  arr[i] = key
+  while i > 0 and arr[parent(i)] < arr[i]
+    arr[parent(i)], arr[i] = arr[i], arr[parent(i)]
+    i = parent(i)
+  end
+end
+
+def heap_decrease_key(arr, i, key)
+  if key > arr[i]
+    raise "Invalid input"
+  end
+  arr[i] = key
+  max_heapify(arr, i)
+end
+
+def heap_set_key(arr, i, key)
+  if key < arr[i]
+    heap_decrease_key(arr, i, key)
+  elsif key > arr[i]
+    heap_increase_key(arr, i, key)
+  else
+    raise "Invalid input"
+  end
+end
+
+def insert(arr, key)
+  arr << (-1.0/0.0)
+  heap_increase_key(arr, arr.length - 1, key)
+end
+
 def max_heapify(arr, i)
-  l = left(arr, i)
-  r = right(arr, i)
+  l = left(i)
+  r = right(i)
   if l < arr.length and arr[l] > arr[i]
     largest = l
   else

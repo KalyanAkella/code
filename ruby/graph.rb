@@ -53,6 +53,7 @@ def dfs
       dfs_visit(node)
     end
   end
+  nil
 end
 
 def dfs_visit(node)
