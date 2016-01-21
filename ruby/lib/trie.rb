@@ -18,15 +18,11 @@ def insert(node, word)
 end
 
 def list(node)
-  return [] if node.label == '$'
+  return [""] if node.label == '$'
   ans = []
-  node.childs.each_value do |child_node|
-    child_words = list(child_node)
-    if child_words.empty?
-      ans << node.label
-    else
-      ans << child_words.map { |word| word.prepend(node.label) }
-    end
+  node.childs.each_value do |child|
+    child_words = list(child)
+    ans << child_words.map { |w| w.prepend(node.label) }
   end
   ans.flatten
 end
